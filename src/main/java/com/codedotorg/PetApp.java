@@ -5,6 +5,82 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class PetApp {
+    // Existing PetApp class code...
+    /** The main window to display the app */
+    private Stage window;
+    
+    /** The ImageView for displaying images */
+    private ImageView imageView;
+
+    public class App extends Application {
+        public static void main(String[] args) {
+            launch();
+        }
+    
+        @Override
+        public void start(Stage primaryStage) {
+            String petName = askForPetName();
+            PetApp virtualPet = new PetApp(primaryStage, 500, 500);
+            virtualPet.startApp(petName, "Dog");
+    
+            // PetSelectionScene petSelectionScene = new PetSelectionScene(primaryStage);
+            // petSelectionScene.startApp();
+        }
+    
+        /**
+         * Asks the user for a name for their pet.
+         * 
+         * @return the pet name as a string
+         */
+        private String askForPetName() {
+            TextInputDialog dialog = new TextInputDialog("Fido");
+            dialog.setTitle("Pet Name");
+            dialog.setHeaderText("Enter a name for your pet:");
+            dialog.setContentText("Pet Name:");
+    
+            Optional<String> result = dialog.showAndWait();
+            return result.orElse("Fido"); // Default to "Fido" if no name is entered
+        }
+    }
+
+    /**
+     * Determines the pet type.
+     * 
+     * @return the pet type as a string
+     */
+    private String getPetType() {
+        // Logic to determine the pet type
+        // For simplicity, let's return "Cat" or "Dog"
+        // This can be replaced with actual logic to get user input or configuration
+        return "Cat"; // or "Dog"
+    }   // Example usage
+        handleUserInput("I love my cat");
+    }
+
+    /**
+    }* Handles the user's input and sets the image to either a cat or a dog based on the input.
+     * 
+     * @param userInput the user's input
+     */
+    public void handleUserInput(String userInput) {
+        userInput = userInput.toLowerCase();
+        if (userInput.contains("cat")) {
+            setImage("path/to/cat/image.png");
+        } else if (userInput.contains("dog")) {
+            setImage("path/to/dog/image.png");
+        }
+    }
+
+    /**
+     * Sets the image to the ImageView.
+     * 
+     * @param imagePath the path to the image
+     */
+    private void setImage(String imagePath) {
+        Image image = new Image(imagePath);
+        imageView.setImage(image);
+    }
+}public class PetApp {
 
     /** The main window to display the app */
     private Stage window;
